@@ -44,9 +44,9 @@ class RadioTest {
     @Test
     void shouldSwitchToNextStation() {
         Radio radio = new Radio();
-        radio.setCurrentStation(4);
+        radio.setCurrentStation(5);
         radio.next();
-        int expected = 5;
+        int expected = 6;
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
