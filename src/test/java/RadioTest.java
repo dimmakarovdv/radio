@@ -125,13 +125,13 @@ class RadioTest {
     }
 
     @Test
-    void shouldHandleStationBoundaries() { // Проверка перехода от 9 до 0
+    void shouldHandleStationBoundaries() {
         Radio radio = new Radio();
+
+        // Проверка перехода от 9 до 0
         radio.setCurrentStation(9);
         radio.next();
-        int expected = 0;
-        int actual = radio.getCurrentVolume();
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(0, radio.getCurrentStation());
 
         // Проверка перехода от 0 до 9
         radio.setCurrentStation(0);
@@ -152,10 +152,11 @@ class RadioTest {
         Assertions.assertEquals(8, radio.getCurrentStation());
 
         // Проверка невалидных данных
+        radio.setCurrentStation(5);
         radio.setCurrentStation(-1);
-        Assertions.assertEquals(9, radio.getCurrentStation());
+        Assertions.assertEquals(5, radio.getCurrentStation()); // Отрицательное число присвоится не должно
 
         radio.setCurrentStation(10);
-        Assertions.assertEquals(9, radio.getCurrentStation());
+        Assertions.assertEquals(5, radio.getCurrentStation());
     }
 }
