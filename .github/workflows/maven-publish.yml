@@ -16,8 +16,3 @@
         распределение: 'adopt'
  - название: Сборка с помощью Maven
       запуск: mvn -B -e verify
-
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
