@@ -1,0 +1,23 @@
+имя: Java CI с Maven
+
+при: [отправке, запросе на вытягивание]
+
+задания:
+ сборка: 
+
+ выполняется на: ubuntu-latest
+
+    шаги: 
+ - использует: действия/проверку-версии@v2
+ - имя: Настройка JDK 11
+      использует: действия/настройку-java@v2
+      с:
+ java-версия: '11'
+        распределение: 'adopt'
+ - название: Сборка с помощью Maven
+      запуск: mvn -B -e verify
+
+    - name: Publish to GitHub Packages Apache Maven
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
