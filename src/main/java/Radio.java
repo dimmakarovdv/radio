@@ -30,11 +30,11 @@ public class Radio {
         }
     }
 
-    public int setCurrentStation(int station) { // установка радиостанции с проверкой
+    public void setCurrentStation(int station) { // установка радиостанции с проверкой
         if (station >= 0 && station <= 9) {
             currentStation = station;
         }
-        return station;
+        return;
     }
 
     public int getCurrentStation() { // геттеры для станции

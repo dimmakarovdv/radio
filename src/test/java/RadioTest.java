@@ -112,7 +112,7 @@ class RadioTest {
     }
 
     @Test
-    void shouldHandleVolumeBoundaries() { // уровень громкости на максимуме
+    void shouldHandleVolumeBoundaries() { // попытка установить уровень громкости выше мак значения
         Radio radio = new Radio();
         for (int i = 0; i < 100; i++) radio.increaseVolume();
         int expected = 100;
