@@ -1,18 +1,18 @@
-имя: Java CI с Maven
+name: Java CI with Maven
 
-при: [отправке, запросе на вытягивание]
+on: [push, pull_request]
 
-задания:
- сборка: 
+jobs:
+  build:
 
- выполняется на: ubuntu-latest
+    runs-on: ubuntu-latest
 
-    шаги: 
- - использует: действия/проверку-версии@v2
- - имя: Настройка JDK 11
-      использует: действия/настройку-java@v2
-      с:
- java-версия: '11'
-        распределение: 'adopt'
- - название: Сборка с помощью Maven
-      запуск: mvn -B -e verify
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Build with Maven
+      run: mvn -B -e verify
