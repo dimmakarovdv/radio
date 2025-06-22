@@ -159,4 +159,68 @@ class RadioTest {
         radio.setCurrentStation(10);
         Assertions.assertEquals(5, radio.getCurrentStation());
     }
+    @Test
+    void shouldCreateRadioWithDefaultStations() {
+        Radio radio = new Radio();
+        Assertions.assertEquals(10, radio.getStationsCount());
+    }
+
+    @Test
+    void shouldCreateRadioWithCustomStations() {
+        Radio radio = new Radio(15);
+        Assertions.assertEquals(15, radio.getStationsCount());
+    }
+
+    @Test
+    void shouldCreateRadioWithInvalidStations() {
+        Radio radio = new Radio(-1);
+        Assertions.assertEquals(10, radio.getStationsCount());
+    }
+
+    @Test
+    void shouldSwitchFromMaxCustomStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(19);
+        radio.next();
+        Assertions.assertEquals(0, radio.getCurrentStation());
+    }
+
+    @Test
+    void shouldSwitchFromMinCustomStation() {
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(0);
+        radio.prev();
+        Assertions.assertEquals(19, radio.getCurrentStation());
+    }
+
+    @Test
+    void shouldNotSetInvalidStationForCustomRadio() {
+        Radio radio = new Radio(12);
+        radio.setCurrentStation(10);
+        int saved = radio.getCurrentStation();
+
+        radio.setCurrentStation(-1);
+        Assertions.assertEquals(saved, radio.getCurrentStation());
+
+        radio.setCurrentStation(12);
+        Assertions.assertEquals(saved, radio.getCurrentStation());
+    }
+
+    @Test
+    void shouldHandleVolumeAtMax() {
+        Radio radio = new Radio();
+        for (int i = 0; i < 101; i++) {
+            radio.increaseVolume();
+        }
+        Assertions.assertEquals(100, radio.getCurrentVolume());
+    }
+
+    @Test
+    void shouldHandleVolumeAtMin() {
+        Radio radio = new Radio();
+        for (int i = 0; i < 10; i++) {
+            radio.decreaseVolume();
+        }
+        Assertions.assertEquals(0, radio.getCurrentVolume());
+    }
 }
